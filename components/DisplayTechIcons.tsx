@@ -1,13 +1,29 @@
 import Image from "next/image";
+import { cache } from "react";
 
 import { cn, getTechLogos } from "@/lib/utils";
 
+// Cache the getTechLogos function to avoid redundant network requests
+const getCachedTechLogos = cache(getTechLogos);
+
 const DisplayTechIcons = async ({ techStack }: TechIconProps) => {
-  const techIcons = await getTechLogos(techStack);
+  // Get the tech logos with caching
+  const techIcons = await getCachedTechLogos(techStack);
+
+  // Only show the first 3 tech stack icons
+  const visibleIcons = techIcons.slice(0, 3);
+
+  // Calculate total stack size for accessibility
+  const totalTechs = techStack.length;
+  const hiddenTechs = totalTechs > 3 ? totalTechs - 3 : 0;
 
   return (
-    <div className="flex flex-row">
-      {techIcons.slice(0, 3).map(({ tech, url }, index) => (
+    <div
+      className="flex flex-row"
+      role="group"
+      aria-label={`Technology stack: ${techStack.join(", ")}`}
+    >
+      {visibleIcons.map(({ tech, url }, index) => (
         <div
           key={tech}
           className={cn(
@@ -20,12 +36,23 @@ const DisplayTechIcons = async ({ techStack }: TechIconProps) => {
           <Image
             src={url}
             alt={tech}
-            width={100}
-            height={100}
+            width={20}
+            height={20}
             className="size-5"
+            loading="lazy"
           />
         </div>
       ))}
+
+      {hiddenTechs > 0 && (
+        <div
+          className="relative group bg-dark-300 rounded-full p-2 flex flex-center -ml-3"
+          aria-label={`${hiddenTechs} more technologies`}
+        >
+          <span className="tech-tooltip">+{hiddenTechs} more</span>
+          <span className="text-xs font-medium">+{hiddenTechs}</span>
+        </div>
+      )}
     </div>
   );
 };
