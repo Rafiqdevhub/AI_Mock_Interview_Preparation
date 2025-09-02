@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
-
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
@@ -28,6 +27,7 @@ const Agent = ({
   feedbackId,
   type,
   questions,
+  profileImage,
 }: AgentProps) => {
   const router = useRouter();
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
@@ -174,13 +174,14 @@ const Agent = ({
         <div className="card-border">
           <div className="card-content">
             <Image
-              src="/user-avatar.png"
+              src={profileImage || "/user.jpg"}
               alt="User avatar"
-              width={539}
-              height={539}
-              className="rounded-full object-cover size-[120px]"
+              width={120}
+              height={120}
+              className="rounded-full object-cover size-[200px]"
             />
             <h3>{userName}</h3>
+            <p className="text-sm text-gray-600 mt-2">Candidate</p>
           </div>
         </div>
       </div>
