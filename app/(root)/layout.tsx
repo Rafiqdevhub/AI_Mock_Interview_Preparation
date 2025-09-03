@@ -14,9 +14,18 @@ const Layout = async ({ children }: { children: ReactNode }) => {
     <div className="root-layout">
       <nav className="flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="MockMate Logo" width={38} height={32} />
-          <h2 className="text-primary-100">MockAI</h2>
+          <Image
+            src="/logo.svg"
+            alt="JobCrack AI Logo"
+            width={38}
+            height={32}
+          />
+          <h2 className="text-primary-100">JobCrack AI</h2>
         </Link>
+
+        <div className="text-center text-primary-100 italic text-sm">
+          The best way to predict the future is to create it
+        </div>
 
         <form action={signOut}>
           <Button className="btn-secondary">Logout</Button>

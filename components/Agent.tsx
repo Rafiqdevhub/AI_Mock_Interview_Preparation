@@ -169,7 +169,8 @@ const Agent = ({
               <span className="animate-speak" aria-label="AI is speaking" />
             )}
           </div>
-          <h3>AI Interviewer</h3>
+          <h3>JobCrack AI</h3>
+          <p className="text-sm text-gray-600 mt-2">Your AI Interviewer</p>
         </div>
         <div className="card-border">
           <div className="card-content">
