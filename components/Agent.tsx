@@ -61,30 +61,38 @@ const Agent = ({
     [interviewId, userId, feedbackId, router]
   );
 
-  // Handle starting the call with proper dependency tracking
+  // Handle starting the call with error handling
   const handleCall = useCallback(async () => {
-    setCallStatus(CallStatus.CONNECTING);
+    try {
+      setCallStatus(CallStatus.CONNECTING);
 
-    if (type === "generate") {
-      const workflowId = process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID;
-      if (!workflowId) return;
+      if (type === "generate") {
+        const workflowId = process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID;
+        if (!workflowId) {
+          throw new Error("VAPI_WORKFLOW_ID is not set");
+        }
 
-      await vapi.start(workflowId, {
-        variableValues: {
-          username: userName,
-          userid: userId,
-        },
-      });
-    } else {
-      const formattedQuestions = questions
-        ? questions.map((question) => `- ${question}`).join("\n")
-        : "";
+        await vapi.start(workflowId, {
+          variableValues: {
+            username: userName,
+            userid: userId,
+          },
+        });
+      } else {
+        const formattedQuestions = questions
+          ? questions.map((question) => `- ${question}`).join("\n")
+          : "";
 
-      await vapi.start(interviewer, {
-        variableValues: {
-          questions: formattedQuestions,
-        },
-      });
+        await vapi.start(interviewer, {
+          variableValues: {
+            questions: formattedQuestions,
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Failed to start call:", error);
+      setCallStatus(CallStatus.INACTIVE);
+      alert("Failed to start the call. Check your configuration.");
     }
   }, [type, userName, userId, questions]);
 
@@ -96,10 +104,11 @@ const Agent = ({
 
   // Set up event listeners for the call
   useEffect(() => {
-    const eventHandlers: Record<string, (data: any) => void> = {
+    const eventHandlers = {
       "call-start": () => setCallStatus(CallStatus.ACTIVE),
       "call-end": () => setCallStatus(CallStatus.FINISHED),
-      message: (message: Message) => {
+      message: (data: unknown) => {
+        const message = data as Message;
         if (
           message.type === "transcript" &&
           message.transcriptType === "final"
@@ -115,19 +124,28 @@ const Agent = ({
       },
       "speech-start": () => setIsSpeaking(true),
       "speech-end": () => setIsSpeaking(false),
-      error: () => setCallStatus(CallStatus.INACTIVE),
-    };
+      error: (error: unknown) => {
+        console.error("Vapi error:", error); // Added logging for debugging
+        setCallStatus(CallStatus.INACTIVE);
+        // Optional: Add retry logic or user notification
+        alert("Call error occurred. Please try again.");
+      },
+    } as const;
 
     // Register all event handlers
-    Object.entries(eventHandlers).forEach(([event, handler]) => {
-      vapi.on(event, handler);
-    });
+    (Object.keys(eventHandlers) as Array<keyof typeof eventHandlers>).forEach(
+      (event) => {
+        vapi.on(event, eventHandlers[event]);
+      }
+    );
 
     // Clean up event handlers on unmount
     return () => {
-      Object.entries(eventHandlers).forEach(([event, handler]) => {
-        vapi.off(event, handler);
-      });
+      (Object.keys(eventHandlers) as Array<keyof typeof eventHandlers>).forEach(
+        (event) => {
+          vapi.off(event, eventHandlers[event]);
+        }
+      );
     };
   }, []);
 
