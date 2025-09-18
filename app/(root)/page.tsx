@@ -13,7 +13,6 @@ import {
 const LandingPage = () => {
   return (
     <>
-      {/* Hero Section */}
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
           <h1 className="hero-title">Master Your Next Interview with AI</h1>
@@ -41,7 +40,6 @@ const LandingPage = () => {
         />
       </section>
 
-      {/* Features Section */}
       <section className="flex flex-col gap-8 mt-12">
         <div className="text-center">
           <h2 className="section-title">Why Choose JobCrack AI?</h2>
@@ -52,7 +50,6 @@ const LandingPage = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-          {/* Feature 1 */}
           <div className="card-border landing-feature-card">
             <div className="card p-8 text-center">
               <Image
@@ -70,7 +67,6 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Feature 2 */}
           <div className="card-border landing-feature-card">
             <div className="card p-8 text-center">
               <Image
@@ -88,7 +84,6 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Feature 3 */}
           <div className="card-border landing-feature-card">
             <div className="card p-8 text-center">
               <Image
@@ -108,7 +103,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="flex flex-col gap-8 mt-16">
         <div className="text-center">
           <h2 className="section-title">How It Works</h2>
@@ -147,7 +141,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="card-cta mt-16">
         <div className="flex flex-col gap-6 max-w-lg">
           <h2 className="section-title">Ready to Ace Your Interview?</h2>
@@ -175,7 +168,6 @@ const LandingPage = () => {
         />
       </section>
 
-      {/* Benefits Section */}
       <section className="flex flex-col gap-8 mt-16">
         <div className="text-center">
           <h2 className="section-title">Key Benefits</h2>
@@ -239,7 +231,6 @@ const LandingPage = () => {
   );
 };
 
-// Dashboard Component for Authenticated Users
 const Dashboard = ({
   user,
   userInterviews,
@@ -325,12 +316,10 @@ const Dashboard = ({
 async function Home() {
   const user = await getCurrentUser();
 
-  // If user is not authenticated, show landing page
   if (!user) {
     return <LandingPage />;
   }
 
-  // If user is authenticated, show dashboard
   const [userInterviews, allInterview] = await Promise.all([
     getInterviewsByUserId(user.id),
     getLatestInterviews({ userId: user.id }),

@@ -5,7 +5,6 @@ import { getCurrentUser } from "@/lib/actions/auth.action";
 const Page = async () => {
   const user = await getCurrentUser();
 
-  // Redirect to sign-in if user is not authenticated
   if (!user) {
     redirect("/sign-in");
   }
