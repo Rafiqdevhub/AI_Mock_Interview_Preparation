@@ -1,14 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ReactNode } from "react";
-import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { isAuthenticated, signOut } from "@/lib/actions/auth.action";
+import { getCurrentUser, signOut } from "@/lib/actions/auth.action";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
-  const isUserAuthenticated = await isAuthenticated();
-  if (!isUserAuthenticated) redirect("/sign-in");
+  const user = await getCurrentUser();
 
   return (
     <div className="root-layout">
@@ -27,9 +25,20 @@ const Layout = async ({ children }: { children: ReactNode }) => {
           The best way to predict the future is to create it
         </div>
 
-        <form action={signOut}>
-          <Button className="btn-secondary">Logout</Button>
-        </form>
+        {user ? (
+          <form action={signOut}>
+            <Button className="btn-secondary">Logout</Button>
+          </form>
+        ) : (
+          <div className="flex gap-2">
+            <Button asChild className="btn-secondary">
+              <Link href="/sign-in">Sign In</Link>
+            </Button>
+            <Button asChild className="btn-primary">
+              <Link href="/sign-up">Sign Up</Link>
+            </Button>
+          </div>
+        )}
       </nav>
 
       {children}
