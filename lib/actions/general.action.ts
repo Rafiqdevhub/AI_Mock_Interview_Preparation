@@ -13,6 +13,13 @@ export async function createFeedback(
 ): Promise<{ success: boolean; feedbackId?: string; error?: string }> {
   const { interviewId, userId, transcript, feedbackId } = params;
 
+  if (!db) {
+    return {
+      success: false,
+      error: "Database not available",
+    };
+  }
+
   if (!interviewId || !userId || !transcript.length) {
     return {
       success: false,
@@ -88,6 +95,10 @@ export async function createFeedback(
  * Retrieves an interview by its ID
  */
 export async function getInterviewById(id: string): Promise<Interview | null> {
+  if (!db) {
+    return null;
+  }
+
   if (!id) return null;
 
   try {
@@ -112,6 +123,10 @@ export async function getFeedbackByInterviewId(
   params: GetFeedbackByInterviewIdParams
 ): Promise<Feedback | null> {
   const { interviewId, userId } = params;
+
+  if (!db) {
+    return null;
+  }
 
   if (!interviewId || !userId) return null;
 
@@ -145,6 +160,10 @@ export async function getLatestInterviews(
 ): Promise<Interview[]> {
   const { userId, limit = 20 } = params;
 
+  if (!db) {
+    return [];
+  }
+
   if (!userId) return [];
 
   try {
@@ -172,6 +191,10 @@ export async function getLatestInterviews(
 export async function getInterviewsByUserId(
   userId: string
 ): Promise<Interview[]> {
+  if (!db) {
+    return [];
+  }
+
   if (!userId) return [];
 
   try {

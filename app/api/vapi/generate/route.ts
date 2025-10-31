@@ -20,6 +20,14 @@ interface GenerateInterviewRequest {
  */
 export async function POST(request: NextRequest) {
   try {
+    // Check if Firebase is properly initialized
+    if (!db) {
+      return Response.json(
+        { success: false, error: "Database not available" },
+        { status: 500 }
+      );
+    }
+
     // Parse and validate request body
     const body = await request.json();
     const { type, role, level, techstack, amount, userid } =
