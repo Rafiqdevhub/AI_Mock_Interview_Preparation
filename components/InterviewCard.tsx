@@ -36,9 +36,10 @@ const InterviewCard = async ({
     }[normalizedType] || "bg-light-600";
 
   // Format the date for display
-  const formattedDate = dayjs(
-    feedback?.createdAt || createdAt || Date.now()
-  ).format("MMM D, YYYY");
+  const dateToFormat = feedback?.createdAt || createdAt;
+  const formattedDate = dateToFormat
+    ? dayjs(dateToFormat).format("MMM D, YYYY")
+    : "Recent";
 
   // Determine the interview URL and button text based on feedback status
   const interviewUrl = feedback

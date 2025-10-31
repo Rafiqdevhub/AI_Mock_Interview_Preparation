@@ -17,7 +17,7 @@ Career Intelligence Assistant - Your AI-powered guide for career success, interv
 
 This application is built with:
 
-- **Next.js 15** with App Router
+- **Next.js 16** with App Router
 - **React 19**
 - **TypeScript**
 - **Firebase & Firebase Admin** for authentication and database
