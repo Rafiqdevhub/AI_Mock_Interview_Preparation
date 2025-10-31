@@ -1,17 +1,21 @@
-import { Toaster } from "sonner";
 import type { Metadata } from "next";
-import { Mona_Sans } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const monaSans = Mona_Sans({
-  variable: "--font-mona-sans",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "JobPsych AI",
+  title: "JobPsych — Interview Prep AI",
   description:
-    "Career Intelligence Assistant - Your AI-powered guide for career success, interview preparation, and professional development",
+    "AI-powered mock interviews, personalized feedback, and tailored study plans.",
 };
 
 export default function RootLayout({
@@ -20,10 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${monaSans.className} antialiased pattern`}>
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
-        <Toaster />
       </body>
     </html>
   );
