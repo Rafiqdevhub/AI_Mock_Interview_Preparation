@@ -55,4 +55,4 @@ jobs:
         with:
           node-version: 20
       - run: npm install --production
-      - run: npm audit --production --audit-level=high
+      - run: npm audit --omit=dev --audit-level=high
