@@ -1,14 +1,16 @@
-# AI Mock Interview
+# JobPsych AI
 
-An AI-powered interview practice platform that helps you prepare for job interviews with realistic simulations and instant feedback.
+Career Intelligence Assistant - Your AI-powered guide for career success, interview preparation, and professional development.
 
 ## Features
 
-- **AI-Powered Interviews**: Practice with realistic interviews tailored to your desired role and tech stack
-- **Voice Interaction**: Engage in natural voice conversations with the AI interviewer
-- **Instant Feedback**: Receive comprehensive performance assessments after each interview
-- **Personalized Analytics**: Track your progress across multiple interview sessions
-- **Technology Specific**: Practice with questions targeted to specific tech stacks
+- **Career Intelligence**: Personalized career guidance and strategic advice
+- **Interview Mastery**: AI-powered interview practice with realistic simulations
+- **Skill Development**: Targeted learning resources and development plans
+- **Voice Interaction**: Natural voice conversations with the AI assistant
+- **Instant Feedback**: Comprehensive performance assessments and recommendations
+- **Progress Tracking**: Detailed analytics and milestone monitoring
+- **Technology Specific**: Practice for various roles and tech stacks
 - **User Authentication**: Secure sign-in and sign-up functionality
 
 ## Tech Stack

@@ -101,11 +101,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
     <div className="card-border lg:min-w-[566px]">
       <div className="flex flex-col gap-6 card py-14 px-10">
         <div className="flex flex-row gap-2 justify-center">
-          <Image src="/logo.svg" alt="logo" height={32} width={38} />
-          <h2 className="text-primary-100">JobCrack AI</h2>
+          <Image src="/logo.png" alt="logo" height={32} width={38} />
+          <h2 className="text-primary-100">JobPsych AI</h2>
         </div>
 
-        <h3>Crack your next interview with AI</h3>
+        <h3>Advance your career with AI intelligence</h3>
 
         <Form {...form}>
           <form

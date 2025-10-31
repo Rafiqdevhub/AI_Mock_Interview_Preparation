@@ -34,13 +34,11 @@ const Agent = ({
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  // Memoize the last message content for efficient re-renders
   const lastMessage = useMemo(
     () => (messages.length > 0 ? messages[messages.length - 1].content : ""),
     [messages]
   );
 
-  // Handle feedback generation with proper dependency tracking
   const handleGenerateFeedback = useCallback(
     async (messageData: SavedMessage[]) => {
       if (!interviewId || !userId) return;
@@ -61,7 +59,6 @@ const Agent = ({
     [interviewId, userId, feedbackId, router]
   );
 
-  // Handle starting the call with error handling
   const handleCall = useCallback(async () => {
     try {
       setCallStatus(CallStatus.CONNECTING);
@@ -96,13 +93,11 @@ const Agent = ({
     }
   }, [type, userName, userId, questions]);
 
-  // Handle disconnecting the call
   const handleDisconnect = useCallback(() => {
     setCallStatus(CallStatus.FINISHED);
     vapi.stop();
   }, []);
 
-  // Set up event listeners for the call
   useEffect(() => {
     const eventHandlers = {
       "call-start": () => setCallStatus(CallStatus.ACTIVE),
@@ -125,21 +120,18 @@ const Agent = ({
       "speech-start": () => setIsSpeaking(true),
       "speech-end": () => setIsSpeaking(false),
       error: (error: unknown) => {
-        console.error("Vapi error:", error); // Added logging for debugging
+        console.error("Call error:", error);
         setCallStatus(CallStatus.INACTIVE);
-        // Optional: Add retry logic or user notification
         alert("Call error occurred. Please try again.");
       },
     } as const;
 
-    // Register all event handlers
     (Object.keys(eventHandlers) as Array<keyof typeof eventHandlers>).forEach(
       (event) => {
         vapi.on(event, eventHandlers[event]);
       }
     );
 
-    // Clean up event handlers on unmount
     return () => {
       (Object.keys(eventHandlers) as Array<keyof typeof eventHandlers>).forEach(
         (event) => {
@@ -149,7 +141,6 @@ const Agent = ({
     };
   }, []);
 
-  // Handle call completion
   useEffect(() => {
     if (callStatus === CallStatus.FINISHED) {
       if (type === "generate") {
@@ -160,7 +151,6 @@ const Agent = ({
     }
   }, [callStatus, type, messages, router, handleGenerateFeedback]);
 
-  // Determine button text based on call status
   const buttonText = useMemo(() => {
     if (
       callStatus === CallStatus.INACTIVE ||
@@ -187,8 +177,10 @@ const Agent = ({
               <span className="animate-speak" aria-label="AI is speaking" />
             )}
           </div>
-          <h3>JobCrack AI</h3>
-          <p className="text-sm text-gray-600 mt-2">Your AI Interviewer</p>
+          <h3>JobPsych AI</h3>
+          <p className="text-sm text-gray-600 mt-2">
+            Your Career Intelligence Assistant
+          </p>
         </div>
         <div className="card-border">
           <div className="card-content">

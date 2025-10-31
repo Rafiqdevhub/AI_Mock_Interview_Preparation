@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ReactNode } from "react";
-
 import { Button } from "@/components/ui/button";
 import { getCurrentUser, signOut } from "@/lib/actions/auth.action";
 
@@ -13,12 +12,12 @@ const Layout = async ({ children }: { children: ReactNode }) => {
       <nav className="flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo.svg"
-            alt="JobCrack AI Logo"
+            src="/logo.png"
+            alt="JobPsych AI Logo"
             width={38}
             height={32}
           />
-          <h2 className="text-primary-100">JobCrack AI</h2>
+          <h2 className="text-primary-100">JobPsych AI</h2>
         </Link>
 
         <div className="text-center text-primary-100 italic text-sm">

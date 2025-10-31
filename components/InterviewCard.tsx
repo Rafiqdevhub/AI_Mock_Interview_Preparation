@@ -1,8 +1,6 @@
 import dayjs from "dayjs";
 import Link from "next/link";
 import Image from "next/image";
-import { memo } from "react";
-
 import { Button } from "./ui/button";
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";

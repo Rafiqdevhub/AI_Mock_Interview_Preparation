@@ -9,8 +9,9 @@ const monaSans = Mona_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "JobCrack AI",
-  description: "An AI-powered platform for preparing for job interviews",
+  title: "JobPsych AI",
+  description:
+    "Career Intelligence Assistant - Your AI-powered guide for career success, interview preparation, and professional development",
 };
 
 export default function RootLayout({

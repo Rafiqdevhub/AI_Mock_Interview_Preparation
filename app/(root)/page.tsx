@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-
 import { Button } from "@/components/ui/button";
 import InterviewCard from "@/components/InterviewCard";
-
+import Footer from "@/components/Footer";
 import { getCurrentUser } from "@/lib/actions/auth.action";
 import {
   getInterviewsByUserId,
@@ -15,15 +14,16 @@ const LandingPage = () => {
     <>
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
-          <h1 className="hero-title">Master Your Next Interview with AI</h1>
+          <h1 className="hero-title">Your AI Career Intelligence Assistant</h1>
           <p className="text-lg text-light-100">
-            Practice real interview questions, get instant AI-powered feedback,
-            and boost your confidence with JobCrack AI.
+            Get personalized career guidance, practice interviews, receive
+            expert feedback, and accelerate your professional growth with
+            JobPsych AI.
           </p>
 
           <div className="auth-buttons">
             <Button asChild className="btn-primary max-sm:w-full">
-              <Link href="/sign-up">Get Started Free</Link>
+              <Link href="/sign-up">Get Started </Link>
             </Button>
             <Button asChild className="btn-secondary max-sm:w-full">
               <Link href="/sign-in">Sign In</Link>
@@ -42,10 +42,11 @@ const LandingPage = () => {
 
       <section className="flex flex-col gap-8 mt-12">
         <div className="text-center">
-          <h2 className="section-title">Why Choose JobCrack AI?</h2>
+          <h2 className="section-title">Why Choose JobPsych AI?</h2>
           <p className="feature-description text-lg max-w-2xl mx-auto">
-            Our AI-powered platform helps you practice and perfect your
-            interview skills with realistic scenarios and personalized feedback.
+            Your comprehensive AI-powered career companion that provides
+            intelligent guidance, interview practice, and personalized
+            development strategies.
           </p>
         </div>
 
@@ -59,10 +60,11 @@ const LandingPage = () => {
                 height={80}
                 className="mx-auto mb-4"
               />
-              <h3 className="feature-title">AI-Powered Practice</h3>
+              <h3 className="feature-title">Career Guidance</h3>
               <p className="feature-description">
-                Practice with our intelligent AI interviewer that adapts to your
-                responses and provides realistic interview scenarios.
+                Receive personalized career advice, industry insights, and
+                strategic guidance to navigate your professional journey
+                effectively.
               </p>
             </div>
           </div>
@@ -76,10 +78,10 @@ const LandingPage = () => {
                 height={80}
                 className="mx-auto mb-4"
               />
-              <h3 className="feature-title">Instant Feedback</h3>
+              <h3 className="feature-title">Interview Mastery</h3>
               <p className="feature-description">
-                Get detailed, actionable feedback on your performance, including
-                strengths and areas for improvement.
+                Hone your interview skills with AI-powered practice sessions,
+                instant feedback, and performance analytics.
               </p>
             </div>
           </div>
@@ -93,10 +95,10 @@ const LandingPage = () => {
                 height={80}
                 className="mx-auto mb-4"
               />
-              <h3 className="feature-title">Multiple Tech Stacks</h3>
+              <h3 className="feature-title">Professional Development</h3>
               <p className="feature-description">
-                Practice interviews for various roles and technologies including
-                React, Node.js, Python, and more.
+                Access resources, skill assessments, and development plans
+                tailored to your career goals and industry requirements.
               </p>
             </div>
           </div>
@@ -107,65 +109,38 @@ const LandingPage = () => {
         <div className="text-center">
           <h2 className="section-title">How It Works</h2>
           <p className="feature-description text-lg max-w-2xl mx-auto">
-            Get interview-ready in just three simple steps
+            Transform your career with our intelligent three-step process
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
           <div className="text-center">
             <div className="step-number">1</div>
-            <h3 className="feature-title">Choose Your Role</h3>
+            <h3 className="feature-title">Assess & Plan</h3>
             <p className="feature-description">
-              Select the position you&apos;re applying for and specify your tech
-              stack and experience level.
+              Share your career goals and current situation to receive
+              personalized guidance and development plans.
             </p>
           </div>
 
           <div className="text-center">
             <div className="step-number">2</div>
-            <h3 className="feature-title">Practice Interview</h3>
+            <h3 className="feature-title">Practice & Learn</h3>
             <p className="feature-description">
-              Engage in a realistic AI-powered interview session with voice
-              interaction and relevant questions.
+              Engage in interactive sessions including mock interviews, skill
+              assessments, and targeted learning experiences.
             </p>
           </div>
 
           <div className="text-center">
             <div className="step-number">3</div>
-            <h3 className="feature-title">Get Feedback</h3>
+            <h3 className="feature-title">Grow & Succeed</h3>
             <p className="feature-description">
-              Receive detailed performance analysis with personalized
-              recommendations for improvement.
+              Track your progress, receive ongoing feedback, and achieve your
+              career objectives with confidence.
             </p>
           </div>
         </div>
-      </section>
-
-      <section className="card-cta mt-16">
-        <div className="flex flex-col gap-6 max-w-lg">
-          <h2 className="section-title">Ready to Ace Your Interview?</h2>
-          <p className="text-lg text-light-100">
-            Join thousands of job seekers who have improved their interview
-            skills with JobCrack AI.
-          </p>
-
-          <div className="auth-buttons">
-            <Button asChild className="btn-primary max-sm:w-full">
-              <Link href="/sign-up">Start Practicing Now</Link>
-            </Button>
-            <Button asChild className="btn-secondary max-sm:w-full">
-              <Link href="/sign-in">I Have an Account</Link>
-            </Button>
-          </div>
-        </div>
-
-        <Image
-          src="/user.jpg"
-          alt="Success Story"
-          width={400}
-          height={400}
-          className="max-sm:hidden rounded-2xl"
-        />
       </section>
 
       <section className="flex flex-col gap-8 mt-16">
@@ -179,10 +154,10 @@ const LandingPage = () => {
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <div>
-              <h3 className="feature-title">Realistic Interview Experience</h3>
+              <h3 className="feature-title">Personalized Career Strategy</h3>
               <p className="feature-description">
-                Practice with an AI that mimics real interviewer behavior and
-                asks relevant questions for your field.
+                Receive tailored career advice based on your unique skills,
+                experience, and professional aspirations.
               </p>
             </div>
           </div>
@@ -192,10 +167,10 @@ const LandingPage = () => {
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <div>
-              <h3 className="feature-title">Personalized Feedback</h3>
+              <h3 className="feature-title">Comprehensive Skill Development</h3>
               <p className="feature-description">
-                Receive detailed analysis of your responses with specific
-                recommendations for improvement.
+                Access targeted learning resources and development plans
+                designed to bridge skill gaps and accelerate growth.
               </p>
             </div>
           </div>
@@ -205,10 +180,10 @@ const LandingPage = () => {
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <div>
-              <h3 className="feature-title">Practice Anytime</h3>
+              <h3 className="feature-title">24/7 Career Support</h3>
               <p className="feature-description">
-                Available 24/7 to help you practice whenever you have time,
-                fitting your schedule perfectly.
+                Get instant access to career guidance and support whenever you
+                need it, fitting seamlessly into your busy schedule.
               </p>
             </div>
           </div>
@@ -218,15 +193,16 @@ const LandingPage = () => {
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <div>
-              <h3 className="feature-title">Track Your Progress</h3>
+              <h3 className="feature-title">Progress Tracking & Analytics</h3>
               <p className="feature-description">
-                Monitor your improvement over time with detailed performance
-                analytics and scoring.
+                Monitor your career development with detailed analytics,
+                milestone tracking, and performance insights over time.
               </p>
             </div>
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };
@@ -249,7 +225,8 @@ const Dashboard = ({
         <div className="flex flex-col gap-6 max-w-lg">
           <h2>Welcome back, {user.name}!</h2>
           <p className="text-lg">
-            Ready to practice more interviews and improve your skills?
+            Continue your career development journey and unlock new
+            opportunities with JobPsych AI.
           </p>
 
           <Button asChild className="btn-primary max-sm:w-full">
@@ -309,6 +286,8 @@ const Dashboard = ({
           )}
         </div>
       </section>
+
+      <Footer />
     </>
   );
 };
