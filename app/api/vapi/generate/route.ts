@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     // Generate interview questions using AI
     const { text: questionsText } = await generateText({
-      model: google("gemini-2.0-flash-001"),
+      model: google("gemini-2.0-flash-001") as never,
       prompt: `Prepare questions for a job interview.
         The job role is ${role}.
         The job experience level is ${level}.
@@ -48,7 +48,6 @@ export async function POST(request: NextRequest) {
         ["Question 1", "Question 2", "Question 3"]
       `,
       temperature: 0.7, // Add temperature for more controlled output
-      maxTokens: 1000, // Limit the response size
     });
 
     // Parse questions and handle potential parsing errors
