@@ -43,6 +43,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
+      if (!auth) {
+        toast.error("Authentication service not available");
+        return;
+      }
+
       if (type === "sign-up") {
         const { name, email, password } = data;
 
