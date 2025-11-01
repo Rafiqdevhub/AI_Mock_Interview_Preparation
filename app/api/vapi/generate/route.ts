@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     // Generate interview questions using AI
     const { text: questionsText } = await generateText({
-      model: google("gemini-2.0-flash-001") as never,
+      model: google("gemini-2.5 -flash") as never,
       prompt: `Prepare questions for a job interview.
         The job role is ${role}.
         The job experience level is ${level}.
@@ -54,6 +54,8 @@ export async function POST(request: NextRequest) {
         The questions are going to be read by a voice assistant so do not use "/" or "*" or any other special characters which might break the voice assistant.
         Return the questions formatted like this:
         ["Question 1", "Question 2", "Question 3"]
+
+        Thank you! <3
       `,
       temperature: 0.7, // Add temperature for more controlled output
     });
