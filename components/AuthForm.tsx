@@ -8,6 +8,7 @@ import { auth } from "@/firebase/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
 import {
   createUserWithEmailAndPassword,
@@ -30,6 +31,7 @@ const authFormSchema = (type: FormType) => {
 
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,6 +45,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
+      setIsLoading(true);
+
       if (!auth) {
         toast.error("Authentication service not available");
         return;
@@ -97,6 +101,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
     } catch (error) {
       console.log(error);
       toast.error(`There was an error: ${error}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -124,6 +130,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                 label="Name"
                 placeholder="Your Name"
                 type="text"
+                disabled={isLoading}
               />
             )}
 
@@ -133,6 +140,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
               label="Email"
               placeholder="Your email address"
               type="email"
+              disabled={isLoading}
             />
 
             <FormField
@@ -141,10 +149,17 @@ const AuthForm = ({ type }: { type: FormType }) => {
               label="Password"
               placeholder="Enter your password"
               type="password"
+              disabled={isLoading}
             />
 
-            <Button className="btn" type="submit">
-              {isSignIn ? "Sign In" : "Create an Account"}
+            <Button className="btn" type="submit" disabled={isLoading}>
+              {isLoading
+                ? isSignIn
+                  ? "Signing In..."
+                  : "Creating Account..."
+                : isSignIn
+                ? "Sign In"
+                : "Create an Account"}
             </Button>
           </form>
         </Form>
