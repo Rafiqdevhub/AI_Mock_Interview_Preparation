@@ -5,7 +5,6 @@ import { NextRequest } from "next/server";
 import { db } from "@/firebase/admin";
 import { getRandomInterviewCover } from "@/lib/utils";
 
-// Define request body interface for better type safety
 interface GenerateInterviewRequest {
   type: string;
   role: string;
@@ -15,12 +14,8 @@ interface GenerateInterviewRequest {
   userid: string;
 }
 
-/**
- * Handles POST requests to generate new interviews
- */
 export async function POST(request: NextRequest) {
   try {
-    // Check if Firebase is properly initialized
     if (!db) {
       return Response.json(
         { success: false, error: "Database not available" },
@@ -28,12 +23,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Parse and validate request body
     const body = await request.json();
     const { type, role, level, techstack, amount, userid } =
       body as GenerateInterviewRequest;
 
-    // Validate required fields
     if (!type || !role || !level || !techstack || !amount || !userid) {
       return Response.json(
         { success: false, error: "Missing required fields" },
@@ -43,7 +36,7 @@ export async function POST(request: NextRequest) {
 
     // Generate interview questions using AI
     const { text: questionsText } = await generateText({
-      model: google("gemini-2.5 -flash") as never,
+      model: google("gemini-2.5-flash") as never,
       prompt: `Prepare questions for a job interview.
         The job role is ${role}.
         The job experience level is ${level}.
@@ -90,7 +83,6 @@ export async function POST(request: NextRequest) {
       createdAt: new Date().toISOString(),
     };
 
-    // Save to database
     const docRef = await db.collection("interviews").add(interview);
 
     return Response.json(
@@ -123,9 +115,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/**
- * Handles GET requests for health checks
- */
 export async function GET() {
   return Response.json(
     {
