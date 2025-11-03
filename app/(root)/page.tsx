@@ -25,9 +25,6 @@ const LandingPage = () => {
             <Button asChild className="btn-primary max-sm:w-full">
               <Link href="/sign-up">Get Started </Link>
             </Button>
-            <Button asChild className="btn-secondary max-sm:w-full">
-              <Link href="/sign-in">Sign In</Link>
-            </Button>
           </div>
         </div>
 
@@ -150,7 +147,7 @@ const LandingPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <div className="flex items-start gap-4">
-            <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center shrink-0 mt-1">
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <div>
@@ -163,7 +160,7 @@ const LandingPage = () => {
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center shrink-0 mt-1">
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <div>
@@ -176,7 +173,7 @@ const LandingPage = () => {
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center shrink-0 mt-1">
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <div>
@@ -189,7 +186,7 @@ const LandingPage = () => {
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center shrink-0 mt-1">
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <div>

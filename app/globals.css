@@ -4,6 +4,43 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Tinos Font Face Declarations */
+@font-face {
+  font-family: "Tinos";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/tinos/v16/buEwpTfczT5H1H5Z1mIdx3s.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tinos";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fonts.gstatic.com/s/tinos/v16/buEvpTfczT5H1H5Z1mId_VvO6yB_.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tinos";
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/tinos/v16/buE1pTfczT5H1H5Z1mIdQVeKfzUN-Q.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tinos";
+  font-style: italic;
+  font-weight: 700;
+  src: url("https://fonts.gstatic.com/s/tinos/v16/buE3pTfczT5H1H5Z1mIdQVeKfzXR4Tz0.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
 @theme {
   --color-success-100: #49de50;
   --color-success-200: #42c748;
@@ -23,6 +60,11 @@
   --color-dark-300: #242633;
 
   --font-mona-sans: "Mona Sans", sans-serif;
+
+  /* Tinos Font Variables */
+  --font-tinos: "Tinos", Georgia, serif;
+  --font-tinos-weight-regular: 400;
+  --font-tinos-weight-bold: 700;
 
   --bg-pattern: url("/pattern.png");
 }
@@ -107,6 +149,16 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -132,6 +184,39 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Font Family Configurations */
+  --font-family-tinos: var(--font-tinos);
+  --font-family-sans: system-ui, sans-serif;
+  --font-family-serif: var(--font-tinos);
+}
+
+@layer base {
+  /* Apply Tinos to all heading elements globally */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-tinos);
+    font-weight: var(--font-tinos-weight-bold);
+  }
+
+  /* Specific heading styles */
+  h1 {
+    font-family: var(--font-tinos);
+    font-weight: 900;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-tinos);
+    font-weight: 700;
+  }
 }
 
 @layer base {

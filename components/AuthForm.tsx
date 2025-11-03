@@ -111,6 +111,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
   return (
     <div className="card-border lg:min-w-[566px]">
       <div className="flex flex-col gap-6 card py-14 px-10">
+        <div className="flex justify-start mb-4">
+          <Button asChild className="btn-secondary">
+            <Link href="/">← Back to Home</Link>
+          </Button>
+        </div>
+
         <div className="flex flex-row gap-2 justify-center">
           <Image src="/logo.png" alt="logo" height={32} width={38} />
           <h2 className="text-primary-100">JobPsych AI</h2>
