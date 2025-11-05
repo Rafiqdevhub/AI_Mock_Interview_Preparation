@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import InterviewCard from "@/components/InterviewCard";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { getCurrentUser } from "@/lib/actions/auth.action";
-import {
-  getInterviewsByUserId,
-  getLatestInterviews,
-} from "@/lib/actions/general.action";
 
-const LandingPage = () => {
+async function Home() {
+  // Check if user is authenticated
+  const user = await getCurrentUser();
+
   return (
     <>
+      <Navbar />
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
           <h1 className="hero-title">Your AI Career Intelligence Assistant</h1>
@@ -22,9 +22,20 @@ const LandingPage = () => {
           </p>
 
           <div className="auth-buttons">
-            <Button asChild className="btn-primary max-sm:w-full">
-              <Link href="/sign-up">Get Started </Link>
-            </Button>
+            {user ? (
+              <Button asChild className="btn-primary max-sm:w-full">
+                <Link href="/dashboard">Go to Dashboard</Link>
+              </Button>
+            ) : (
+              <>
+                <Button asChild className="btn-primary max-sm:w-full">
+                  <Link href="/sign-up">Get Started</Link>
+                </Button>
+                <Button asChild className="btn-secondary max-sm:w-full">
+                  <Link href="/sign-in">Sign In</Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
 
@@ -201,112 +212,6 @@ const LandingPage = () => {
       </section>
       <Footer />
     </>
-  );
-};
-
-const Dashboard = ({
-  user,
-  userInterviews,
-  allInterview,
-}: {
-  user: User;
-  userInterviews: Interview[];
-  allInterview: Interview[];
-}) => {
-  const hasPastInterviews = userInterviews?.length > 0;
-  const hasUpcomingInterviews = allInterview?.length > 0;
-
-  return (
-    <>
-      <section className="card-cta">
-        <div className="flex flex-col gap-6 max-w-lg">
-          <h2>Welcome back, {user.name}!</h2>
-          <p className="text-lg">
-            Continue your career development journey and unlock new
-            opportunities with JobPsych AI.
-          </p>
-
-          <Button asChild className="btn-primary max-sm:w-full">
-            <Link href="/interview">Start New Interview</Link>
-          </Button>
-        </div>
-
-        <Image
-          src="/robot.png"
-          alt="AI Interview Assistant"
-          width={400}
-          height={400}
-          className="max-sm:hidden"
-        />
-      </section>
-
-      <section className="flex flex-col gap-6 mt-8">
-        <h2>Your Interviews</h2>
-
-        <div className="interviews-section">
-          {hasPastInterviews ? (
-            userInterviews?.map((interview) => (
-              <InterviewCard
-                key={interview.id}
-                userId={user?.id}
-                interviewId={interview.id}
-                role={interview.role}
-                type={interview.type}
-                techstack={interview.techstack}
-                createdAt={interview.createdAt}
-              />
-            ))
-          ) : (
-            <p>You haven&apos;t taken any interviews yet</p>
-          )}
-        </div>
-      </section>
-
-      <section className="flex flex-col gap-6 mt-8">
-        <h2>Practice More</h2>
-
-        <div className="interviews-section">
-          {hasUpcomingInterviews ? (
-            allInterview?.map((interview) => (
-              <InterviewCard
-                key={interview.id}
-                userId={user?.id}
-                interviewId={interview.id}
-                role={interview.role}
-                type={interview.type}
-                techstack={interview.techstack}
-                createdAt={interview.createdAt}
-              />
-            ))
-          ) : (
-            <p>There are no interview templates available</p>
-          )}
-        </div>
-      </section>
-
-      <Footer />
-    </>
-  );
-};
-
-async function Home() {
-  const user = await getCurrentUser();
-
-  if (!user) {
-    return <LandingPage />;
-  }
-
-  const [userInterviews, allInterview] = await Promise.all([
-    getInterviewsByUserId(user.id),
-    getLatestInterviews({ userId: user.id }),
-  ]);
-
-  return (
-    <Dashboard
-      user={user}
-      userInterviews={userInterviews || []}
-      allInterview={allInterview || []}
-    />
   );
 }
 

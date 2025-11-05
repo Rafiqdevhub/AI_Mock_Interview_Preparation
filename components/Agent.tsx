@@ -94,8 +94,13 @@ const Agent = ({
   }, [type, userName, userId, questions]);
 
   const handleDisconnect = useCallback(() => {
-    setCallStatus(CallStatus.FINISHED);
-    vapi.stop();
+    try {
+      setCallStatus(CallStatus.FINISHED);
+      vapi.stop();
+    } catch {
+      // Suppress expected errors when ending call manually
+      console.log("Call ended by user");
+    }
   }, []);
 
   useEffect(() => {
@@ -120,6 +125,18 @@ const Agent = ({
       "speech-start": () => setIsSpeaking(true),
       "speech-end": () => setIsSpeaking(false),
       error: (error: unknown) => {
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+
+        // Ignore expected "meeting ended" errors
+        if (
+          errorMessage.includes("Meeting ended") ||
+          errorMessage.includes("Meeting has ended")
+        ) {
+          console.log("Call ended normally");
+          return;
+        }
+
         console.error("Call error:", error);
         setCallStatus(CallStatus.INACTIVE);
         alert("Call error occurred. Please try again.");
