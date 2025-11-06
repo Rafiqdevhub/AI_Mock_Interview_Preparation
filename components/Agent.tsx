@@ -53,7 +53,7 @@ const Agent = ({
       if (success && id) {
         router.push(`/interview/${interviewId}/feedback`);
       } else {
-        router.push("/");
+        router.push("/dashboard");
       }
     },
     [interviewId, userId, feedbackId, router]
@@ -161,7 +161,7 @@ const Agent = ({
   useEffect(() => {
     if (callStatus === CallStatus.FINISHED) {
       if (type === "generate") {
-        router.push("/");
+        router.push("/dashboard");
       } else if (messages.length > 0) {
         handleGenerateFeedback(messages);
       }
