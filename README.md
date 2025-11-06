@@ -65,6 +65,8 @@ GOOGLE_AI_API_KEY=
 
 ## Getting Started
 
+### Option 1: Local Development
+
 First, install the dependencies:
 
 ```bash
@@ -88,6 +90,37 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Option 2: Docker Deployment 🐳
+
+**Quick Start with Docker:**
+
+```bash
+# Build and run with Docker Compose
+docker-compose up -d
+
+# Or build manually
+docker build -t jobpsych-app .
+docker run -p 3000:3000 --env-file .env.local jobpsych-app
+```
+
+**Using Makefile (Recommended):**
+
+```bash
+make build    # Build Docker image
+make up       # Start containers
+make logs     # View logs
+make down     # Stop containers
+make health   # Check health status
+```
+
+**For complete Docker deployment guide**, see [DOCKER.md](./DOCKER.md) which includes:
+
+- Production deployment strategies
+- Cloud platform deployment (AWS, GCP, Azure)
+- Monitoring and troubleshooting
+- Security best practices
+- CI/CD pipelines
 
 ## Usage
 
