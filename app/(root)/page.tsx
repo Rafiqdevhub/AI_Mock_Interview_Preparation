@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import { getCurrentUser } from "@/lib/actions/auth.action";
 
 async function Home() {
-  // Check if user is authenticated
   const user = await getCurrentUser();
 
   return (

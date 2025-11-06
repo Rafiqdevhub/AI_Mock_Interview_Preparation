@@ -6,7 +6,6 @@ function initFirebaseAdmin() {
   const apps = getApps();
 
   if (!apps.length) {
-    // Check if required environment variables are available
     if (
       !process.env.FIREBASE_PROJECT_ID ||
       !process.env.FIREBASE_CLIENT_EMAIL ||
@@ -32,11 +31,10 @@ function initFirebaseAdmin() {
   };
 }
 
-// Only initialize if we're not in build time and have required env vars
 let firebaseAdmin: { auth: Auth; db: Firestore } | null = null;
 
 if (
-  typeof window === "undefined" && // Not in browser
+  typeof window === "undefined" &&
   process.env.FIREBASE_PROJECT_ID &&
   process.env.FIREBASE_CLIENT_EMAIL &&
   process.env.FIREBASE_PRIVATE_KEY

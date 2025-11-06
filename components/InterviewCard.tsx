@@ -15,7 +15,6 @@ const InterviewCard = async ({
   techstack,
   createdAt,
 }: InterviewCardProps) => {
-  // Only fetch feedback if we have both userId and interviewId
   const feedback =
     userId && interviewId
       ? await getFeedbackByInterviewId({
@@ -24,10 +23,8 @@ const InterviewCard = async ({
         })
       : null;
 
-  // Normalize the interview type for consistent display
   const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
 
-  // Map the type to the appropriate badge color
   const badgeColor =
     {
       Behavioral: "bg-light-400",
@@ -35,20 +32,17 @@ const InterviewCard = async ({
       Technical: "bg-light-800",
     }[normalizedType] || "bg-light-600";
 
-  // Format the date for display
   const dateToFormat = feedback?.createdAt || createdAt;
   const formattedDate = dateToFormat
     ? dayjs(dateToFormat).format("MMM D, YYYY")
     : "Recent";
 
-  // Determine the interview URL and button text based on feedback status
   const interviewUrl = feedback
     ? `/interview/${interviewId}/feedback`
     : `/interview/${interviewId}`;
 
   const buttonText = feedback ? "Check Feedback" : "View Interview";
 
-  // Default text for interviews without feedback
   const defaultAssessment =
     "You haven't taken this interview yet. Take it now to improve your skills.";
 

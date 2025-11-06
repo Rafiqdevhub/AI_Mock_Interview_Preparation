@@ -12,7 +12,6 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Check if all required Firebase config values are available
 const hasValidConfig = !!(
   firebaseConfig.apiKey &&
   firebaseConfig.authDomain &&

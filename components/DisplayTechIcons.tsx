@@ -3,17 +3,13 @@ import { cache } from "react";
 
 import { cn, getTechLogos } from "@/lib/utils";
 
-// Cache the getTechLogos function to avoid redundant network requests
 const getCachedTechLogos = cache(getTechLogos);
 
 const DisplayTechIcons = async ({ techStack }: TechIconProps) => {
-  // Get the tech logos with caching
   const techIcons = await getCachedTechLogos(techStack);
 
-  // Only show the first 3 tech stack icons
   const visibleIcons = techIcons.slice(0, 3);
 
-  // Calculate total stack size for accessibility
   const totalTechs = techStack.length;
   const hiddenTechs = totalTechs > 3 ? totalTechs - 3 : 0;
 

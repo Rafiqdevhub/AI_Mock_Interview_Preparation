@@ -98,7 +98,6 @@ const Agent = ({
       setCallStatus(CallStatus.FINISHED);
       vapi.stop();
     } catch {
-      // Suppress expected errors when ending call manually
       console.log("Call ended by user");
     }
   }, []);
@@ -128,7 +127,6 @@ const Agent = ({
         const errorMessage =
           error instanceof Error ? error.message : String(error);
 
-        // Ignore expected "meeting ended" errors
         if (
           errorMessage.includes("Meeting ended") ||
           errorMessage.includes("Meeting has ended")
