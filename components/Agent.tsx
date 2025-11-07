@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
@@ -46,9 +47,12 @@ const Agent = ({
           interviewId,
           userId,
         });
+        toast.error("Missing interview information. Redirecting to dashboard.");
         router.push("/dashboard");
         return;
       }
+
+      toast.info("Generating your feedback...");
 
       const result = await createFeedback({
         interviewId,
@@ -58,8 +62,10 @@ const Agent = ({
       });
 
       if (result.success && result.feedbackId) {
+        toast.success("Feedback generated successfully!");
         router.push(`/interview/${interviewId}/feedback`);
       } else {
+        toast.error(result.error || "Failed to generate feedback");
         router.push("/dashboard");
       }
     },
@@ -69,6 +75,7 @@ const Agent = ({
   const handleCall = useCallback(async () => {
     try {
       setCallStatus(CallStatus.CONNECTING);
+      toast.info("Connecting to interview...");
 
       if (type === "generate") {
         const workflowId = process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID;
@@ -96,7 +103,7 @@ const Agent = ({
     } catch (error) {
       console.error("Failed to start call:", error);
       setCallStatus(CallStatus.INACTIVE);
-      alert("Failed to start the call. Check your configuration.");
+      toast.error("Failed to start the call. Check your configuration.");
     }
   }, [type, userName, userId, questions]);
 
@@ -111,8 +118,14 @@ const Agent = ({
 
   useEffect(() => {
     const eventHandlers = {
-      "call-start": () => setCallStatus(CallStatus.ACTIVE),
-      "call-end": () => setCallStatus(CallStatus.FINISHED),
+      "call-start": () => {
+        setCallStatus(CallStatus.ACTIVE);
+        toast.success("Interview call connected!");
+      },
+      "call-end": () => {
+        setCallStatus(CallStatus.FINISHED);
+        toast.info("Interview call ended");
+      },
       message: (data: unknown) => {
         const message = data as Message;
         if (
@@ -142,9 +155,8 @@ const Agent = ({
           return;
         }
 
-        console.error("Call error:", error);
         setCallStatus(CallStatus.INACTIVE);
-        alert("Call error occurred. Please try again.");
+        toast.error("Call error occurred. Please try again.");
       },
     } as const;
 
