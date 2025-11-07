@@ -46,12 +46,19 @@ export async function createFeedback(
         Transcript:
         ${formattedTranscript}
 
-        Please score the candidate from 0 to 100 in the following areas. Do not add categories other than the ones provided:
-        - **Communication Skills**: Clarity, articulation, structured responses.
-        - **Technical Knowledge**: Understanding of key concepts for the role.
-        - **Problem-Solving**: Ability to analyze problems and propose solutions.
-        - **Cultural & Role Fit**: Alignment with company values and job role.
-        - **Confidence & Clarity**: Confidence in responses, engagement, and clarity.
+        Evaluate the candidate and provide scores (0-100) for EXACTLY these 5 categories:
+        
+        1. **Communication Skills**: Clarity, articulation, structured responses
+        2. **Technical Knowledge**: Understanding of key concepts for the role
+        3. **Problem Solving**: Ability to analyze problems and propose solutions
+        4. **Cultural Fit**: Alignment with company values and job role
+        5. **Confidence and Clarity**: Confidence in responses, engagement, and clarity
+        
+        Also provide:
+        - A total score (average of all category scores)
+        - List of strengths (3-5 points)
+        - List of areas for improvement (3-5 points)
+        - Final assessment (2-3 sentences summary)
       `,
       system:
         "You are a professional interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories",

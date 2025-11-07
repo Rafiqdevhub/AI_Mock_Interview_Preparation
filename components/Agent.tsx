@@ -41,16 +41,23 @@ const Agent = ({
 
   const handleGenerateFeedback = useCallback(
     async (messageData: SavedMessage[]) => {
-      if (!interviewId || !userId) return;
+      if (!interviewId || !userId) {
+        console.error("Missing interviewId or userId:", {
+          interviewId,
+          userId,
+        });
+        router.push("/dashboard");
+        return;
+      }
 
-      const { success, feedbackId: id } = await createFeedback({
+      const result = await createFeedback({
         interviewId,
         userId,
         transcript: messageData,
         feedbackId,
       });
 
-      if (success && id) {
+      if (result.success && result.feedbackId) {
         router.push(`/interview/${interviewId}/feedback`);
       } else {
         router.push("/dashboard");
