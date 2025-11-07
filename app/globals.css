@@ -418,6 +418,19 @@
   }
 }
 
+/* Animation Delays */
+.animation-delay-150 {
+  animation-delay: 150ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
 /* Landing Page Utilities */
 .landing-feature-card {
   @apply transition-transform duration-300 hover:scale-105 hover:shadow-xl;
