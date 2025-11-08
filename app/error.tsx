@@ -5,13 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-export default function Error({
+const Error = ({
   error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
-}) {
+}) => {
   useEffect(() => {
     // Log the error to an error reporting service
     console.error("Application error:", error);
@@ -80,4 +80,6 @@ export default function Error({
       </div>
     </main>
   );
-}
+};
+
+export default Error;

@@ -16,7 +16,6 @@ export default function NotFound() {
       <Navbar />
       <main className="flex-center flex-col min-h-[calc(100vh-200px)] px-4 my-12">
         <div className="flex flex-col items-center gap-8 max-w-2xl text-center">
-          {/* 404 Illustration */}
           <div className="relative">
             <h1 className="text-9xl font-bold text-primary-200/20 max-sm:text-7xl">
               404
@@ -33,7 +32,6 @@ export default function NotFound() {
             </div>
           </div>
 
-          {/* Error Message */}
           <div className="flex flex-col gap-4">
             <h2 className="text-4xl font-bold max-sm:text-3xl">
               Page Not Found
@@ -44,7 +42,6 @@ export default function NotFound() {
             </p>
           </div>
 
-          {/* Suggestions */}
           <div className="border-gradient p-0.5 rounded-2xl w-full">
             <div className="dark-gradient rounded-2xl p-6">
               <h3 className="text-xl font-semibold mb-4">Where to go?</h3>
@@ -89,7 +86,6 @@ export default function NotFound() {
             </div>
           </div>
 
-          {/* CTA Buttons */}
           <div className="flex gap-4 mt-4 max-sm:flex-col max-sm:w-full">
             <Button asChild className="btn-primary">
               <Link href="/">Back to Home</Link>
@@ -99,7 +95,6 @@ export default function NotFound() {
             </Button>
           </div>
 
-          {/* Help Text */}
           <p className="text-sm text-gray-400 mt-8">
             If you believe this is an error, please contact support or try
             refreshing the page.

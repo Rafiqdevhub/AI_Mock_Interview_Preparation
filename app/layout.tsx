@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     "Career Intelligence Assistant - Your AI-powered guide for career success, interview preparation, and professional development",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en" className="dark">
       <body className={`${monaSans.className} antialiased pattern`}>
@@ -27,4 +27,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

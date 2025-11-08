@@ -1,4 +1,4 @@
-export default function Loading() {
+const Loading = () => {
   return (
     <main className="flex-center flex-col min-h-screen">
       <div className="flex flex-col items-center gap-6">
@@ -22,4 +22,6 @@ export default function Loading() {
       </div>
     </main>
   );
-}
+};
+
+export default Loading;

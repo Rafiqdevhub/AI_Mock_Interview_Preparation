@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { getCurrentUser } from "@/lib/actions/auth.action";
 
-async function Home() {
+const Home = async () => {
   const user = await getCurrentUser();
 
   return (
@@ -212,6 +212,6 @@ async function Home() {
       <Footer />
     </>
   );
-}
+};
 
 export default Home;
