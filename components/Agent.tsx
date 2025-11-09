@@ -112,7 +112,7 @@ const Agent = ({
       setCallStatus(CallStatus.FINISHED);
       vapi.stop();
     } catch {
-      console.log("Call ended by user");
+      toast.error("Call ended with errors.");
     }
   }, []);
 
@@ -205,14 +205,14 @@ const Agent = ({
               alt="AI Interviewer"
               width={65}
               height={54}
-              className="object-cover"
+              className="object-cover w-16 h-14 sm:w-[65px] sm:h-14"
             />
             {isSpeaking && (
               <span className="animate-speak" aria-label="AI is speaking" />
             )}
           </div>
-          <h3>JobPsych AI</h3>
-          <p className="text-sm text-gray-600 mt-2">
+          <h3 className="text-lg sm:text-xl">JobPsych AI</h3>
+          <p className="text-xs sm:text-sm text-gray-600 mt-2 text-center px-2">
             Your Career Intelligence Assistant
           </p>
         </div>
@@ -223,10 +223,10 @@ const Agent = ({
               alt="User avatar"
               width={120}
               height={120}
-              className="rounded-full object-cover size-[200px]"
+              className="rounded-full object-cover size-32 sm:size-40 md:size-[200px]"
             />
-            <h3>{userName}</h3>
-            <p className="text-sm text-gray-600 mt-2">Candidate</p>
+            <h3 className="text-lg sm:text-xl">{userName}</h3>
+            <p className="text-xs sm:text-sm text-gray-600 mt-2">Candidate</p>
           </div>
         </div>
       </div>
@@ -237,7 +237,8 @@ const Agent = ({
               key={lastMessage}
               className={cn(
                 "transition-opacity duration-500 opacity-0",
-                "animate-fadeIn opacity-100"
+                "animate-fadeIn opacity-100",
+                "text-sm sm:text-base md:text-lg"
               )}
             >
               {lastMessage}
@@ -245,10 +246,10 @@ const Agent = ({
           </div>
         </div>
       )}
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center px-4 sm:px-0">
         {callStatus !== CallStatus.ACTIVE ? (
           <button
-            className="relative btn-call"
+            className="relative btn-call min-w-[120px] sm:min-w-40 cursor-pointer"
             onClick={handleCall}
             disabled={callStatus === CallStatus.CONNECTING}
             aria-label={
@@ -264,11 +265,11 @@ const Agent = ({
               )}
               aria-hidden="true"
             />
-            <span className="relative">{buttonText}</span>
+            <span className="relative text-sm sm:text-base">{buttonText}</span>
           </button>
         ) : (
           <button
-            className="btn-disconnect"
+            className="btn-disconnect min-w-[120px] sm:min-w-40 text-sm sm:text-base cursor-pointer"
             onClick={handleDisconnect}
             aria-label="End interview call"
           >
